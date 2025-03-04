@@ -1,0 +1,32 @@
+{
+  "name": "metamart",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.16.0",
+    "@react-three/drei": "^9.109.5",
+    "@react-three/fiber": "^8.16.8",
+    "@stripe/stripe-js": "^4.2.0",
+    "antd": "^5.20.1",
+    "ethers": "^6.13.5",
+    "firebase": "^10.12.5",
+    "metamart": "file:",
+    "next": "14.2.5",
+    "razorpay": "^2.9.4",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-toastify": "^10.0.5",
+    "stripe": "^16.7.0",
+    "three": "^0.167.1"
+  },
+  "devDependencies": {
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1"
+  }
+}
