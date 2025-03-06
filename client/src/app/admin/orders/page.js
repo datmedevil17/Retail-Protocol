@@ -1,7 +1,14 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 import { useWeb3 } from "@/context/Web3Context";
 import { ethers } from "ethers";
+import { CardContainer, CardBody, CardItem } from "@/components/ui/3d-card";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 const Page = () => {
   const { contract } = useWeb3();
@@ -51,37 +58,89 @@ const Page = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-gray-950 p-6 text-white">
-      <h1 className="text-4xl font-bold text-center mb-8 text-neonBlue">
+      <h1 className="text-5xl font-extrabold text-center mb-8 text-blue-500 drop-shadow-lg tracking-wide uppercase">
         Metaverse Electronics Store
       </h1>
+
       {Object.entries(categorizedProducts).map(([category, items]) => (
         <div key={category} className="mb-10">
-          <h2 className="text-2xl font-semibold text-neonPurple mb-4">{category}</h2>
+          <h2 className="text-2xl font-semibold text-yellow-200 mb-4">
+            {category}
+          </h2>
           {items.length === 0 ? (
             <p className="text-gray-400">No items available</p>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <Swiper
+              modules={[Navigation, Pagination, Autoplay]}
+              spaceBetween={20}
+              slidesPerView={1}
+              breakpoints={{
+                640: { slidesPerView: 1 },
+                768: { slidesPerView: 2 },
+                1024: { slidesPerView: 3 },
+                1280: { slidesPerView: 4 },
+              }}
+              navigation
+              pagination={{ clickable: true }}
+              
+              className="w-[95vw]"
+            >
               {items.map((product) => (
-                <div
-                  key={product.id}
-                  className="bg-gray-900 shadow-lg rounded-2xl p-4 transition-transform transform hover:scale-105 
-                  hover:shadow-neonPurple border border-neonBlue text-white"
-                >
-                  <img
-                    src={product.imageURI}
-                    alt={product.name}
-                    className="w-full h-40 object-cover rounded-lg mb-4 border border-neonPurple"
-                  />
-                  <h3 className="text-lg font-bold text-neonBlue">{product.name}</h3>
-                  <p className="text-gray-400 text-sm">Brand: {product.company}</p>
-                  <p className="text-gray-300 mt-2">{product.description}</p>
-                  <p className="text-lg font-semibold text-neonPurple mt-3">
-                    Price: {product.price} ETH
-                  </p>
-                  <p className="text-gray-400">Stock: {product.stock}</p>
-                </div>
+                <SwiperSlide key={product.id}>
+                  <CardContainer>
+                    <CardBody className="bg-gray-50 relative group/card dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-auto h-auto rounded-xl p-6 border">
+                      <CardItem
+                        translateZ="50"
+                        className="text-xl font-bold text-neutral-600 dark:text-white"
+                      >
+                        {product.name}
+                      </CardItem>
+                      <CardItem
+                        as="p"
+                        translateZ="60"
+                        className="text-neutral-500 text-sm max-w-sm mt-2 dark:text-neutral-300"
+                      >
+                        {product.description}
+                      </CardItem>
+                      <CardItem translateZ="100" className="w-full mt-4">
+                        <Image
+                          src={product.imageURI}
+                          height={1000}
+                          width={1000}
+                          className="h-60 w-full object-cover rounded-xl group-hover/card:shadow-xl"
+                          alt={product.name}
+                        />
+                      </CardItem>
+                      <div className="flex justify-between items-center mt-6">
+                        <CardItem
+                          translateZ="20"
+                          as="div"
+                          className="text-sm dark:text-white"
+                        >
+                          Brand: {product.company}
+                        </CardItem>
+                        <CardItem
+                          translateZ="20"
+                          as="div"
+                          className="text-sm dark:text-white"
+                        >
+                          Stock: {product.stock}
+                        </CardItem>
+                      </div>
+                      <div className="mt-4">
+                        <CardItem
+                          translateZ="20"
+                          as="div"
+                          className="text-lg font-semibold text-yellow-300"
+                        >
+                          Price: {product.price} ETH
+                        </CardItem>
+                      </div>
+                    </CardBody>
+                  </CardContainer>
+                </SwiperSlide>
               ))}
-            </div>
+            </Swiper>
           )}
         </div>
       ))}
