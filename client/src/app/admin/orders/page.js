@@ -17,9 +17,9 @@ const Page = () => {
     try {
       const productCount = await contract.nextItemId();
       const fetchedProducts = [];
-      for (let i = 1; i <= productCount; i++) { // Assuming max 100 products, adjust as needed
+      for (let i = 1; i <= productCount; i++) {
         const result = await contract.getItemDetails(i);
-        if (!result) break; // Stop if an item ID doesn't exist
+        if (!result) break;
         fetchedProducts.push({
           id: i,
           name: result[0],
@@ -29,11 +29,6 @@ const Page = () => {
           price: ethers.formatEther(result[4].toString()),
           stock: result[5].toString(),
         });
-        console.log(i)
-        console.log(result[1])
-        console.log(result[0])
-        console.log(ethers.formatEther(result[4].toString()))
-
       }
       setProducts(fetchedProducts);
     } catch (error) {
@@ -41,7 +36,6 @@ const Page = () => {
     }
   };
 
-  // Categorizing products based on names (this can be improved if the contract stores categories)
   const categorizedProducts = {
     Console: products.filter((p) => p.name.toLowerCase().includes("console")),
     Mobile: products.filter((p) => p.name.toLowerCase().includes("mobile")),
@@ -49,40 +43,42 @@ const Page = () => {
     Headphones: products.filter((p) =>
       p.name.toLowerCase().includes("headphone")
     ),
-  Television: products.filter((p) => p.name.toLowerCase().includes("televsion")),
+    Television: products.filter((p) =>
+      p.name.toLowerCase().includes("television")
+    ),
     Speaker: products.filter((p) => p.name.toLowerCase().includes("speaker")),
   };
 
   return (
-    <div>
-      <h1>Metaverse Electronics Store</h1>
+    <div className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-gray-950 p-6 text-white">
+      <h1 className="text-4xl font-bold text-center mb-8 text-neonBlue">
+        Metaverse Electronics Store
+      </h1>
       {Object.entries(categorizedProducts).map(([category, items]) => (
-        <div key={category}>
-          <h2>{category}</h2>
+        <div key={category} className="mb-10">
+          <h2 className="text-2xl font-semibold text-neonPurple mb-4">{category}</h2>
           {items.length === 0 ? (
-            <p>No items available</p>
+            <p className="text-gray-400">No items available</p>
           ) : (
-            <div style={{ display: "flex", flexWrap: "wrap", gap: "20px" }}>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
               {items.map((product) => (
                 <div
                   key={product.id}
-                  style={{
-                    border: "1px solid #ccc",
-                    padding: "10px",
-                    maxWidth: "200px",
-                  }}
+                  className="bg-gray-900 shadow-lg rounded-2xl p-4 transition-transform transform hover:scale-105 
+                  hover:shadow-neonPurple border border-neonBlue text-white"
                 >
                   <img
                     src={product.imageURI}
                     alt={product.name}
-                    width="100"
-                    height="100"
+                    className="w-full h-40 object-cover rounded-lg mb-4 border border-neonPurple"
                   />
-                  <h3>{product.name}</h3>
-                  <p>Item Name: {product.company}</p>
-                  <p>{product.description}</p>
-                  <p>Price: {product.price} Wei</p>
-                  <p>Stock: {product.stock}</p>
+                  <h3 className="text-lg font-bold text-neonBlue">{product.name}</h3>
+                  <p className="text-gray-400 text-sm">Brand: {product.company}</p>
+                  <p className="text-gray-300 mt-2">{product.description}</p>
+                  <p className="text-lg font-semibold text-neonPurple mt-3">
+                    Price: {product.price} ETH
+                  </p>
+                  <p className="text-gray-400">Stock: {product.stock}</p>
                 </div>
               ))}
             </div>
