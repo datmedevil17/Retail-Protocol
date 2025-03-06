@@ -23,8 +23,6 @@ import {
   HistoryOutlined,
   EditOutlined,
 } from "@ant-design/icons";
-import CartComponent from "@/components/Cart/CartComponent";
-import { addItemToCart, getCartDetails } from "@/components/Cart/cart";
 import { resolveQuery } from "@/chat/chat";
 import { Staff2 } from "@/components/ThreeD/characters/Staff2";
 import { useWeb3 } from "@/context/Web3Context";
@@ -134,6 +132,7 @@ export default function Page() {
   const showCustomModal = () => {
     setIsCustomModalVisible(true);
   };
+  const buyItem = () => {}
 
   return (
     <>
@@ -242,16 +241,6 @@ export default function Page() {
             size="large"
             style={{ backgroundColor: "#0000FF", color: "white" }}
             onClick={showCustomModal}
-          />
-        </div>
-        {/* Floating Button for Cart */}
-        <div className="fixed bottom-4 right-4 z-20">
-          <Button
-            shape="circle"
-            icon={<ShoppingCartOutlined />}
-            size="large"
-            style={{ backgroundColor: "#008000", color: "white" }}
-            onClick={showCartModal}
           />
         </div>
 
@@ -623,12 +612,9 @@ export default function Page() {
               type="primary"
               icon={<ShoppingCartOutlined />}
               key="add-to-cart"
-              onClick={() => {
-                addItemToCart(models, 1);
-                toast.success("Added to Cart!");
-              }}
+              onClick={() => buyItem()}
             >
-              Add to Cart
+              Buy Item
             </Button>,
             <Button
               type="primary"

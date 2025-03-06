@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react'
 import { useWeb3 } from "../../context/Web3Context"
 
-const page = () => {
+const ViewOrders = () => {
   const {account,contract} = useWeb3()
   useEffect(()=>{
     console.log(contract)
@@ -16,4 +16,4 @@ const page = () => {
   )
 }
 
-export default page
+export default ViewOrders
