@@ -30,7 +30,8 @@ export async function resolveQuery(query) {
   const result = await chat.sendMessage(query);
   const response = await result.response;
   const text = response.text();
-
+  const cleanString = text.replace(/json|/g, "").trim();
+  console.log(cleanString)
   console.log(text);
-  return JSON.parse(text);
+  return JSON.parse(cleanString);
 }

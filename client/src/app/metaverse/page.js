@@ -26,10 +26,11 @@ import {
 import { resolveQuery } from "@/chat/chat";
 import { Staff2 } from "@/components/ThreeD/characters/Staff2";
 import { useWeb3 } from "@/context/Web3Context";
+import { ethers } from "ethers";
 const { Meta } = Card;
 
 export default function Page() {
-  const {account,connectWallet} = useWeb3();
+  const {account,connectWallet,contract} = useWeb3();
   const testing = false;
   const [segment, setSegment] = useState("user4");
   const [isAiModalVisible, setIsAiModalVisible] = useState(false);
@@ -52,17 +53,33 @@ export default function Page() {
     const storedMessages = JSON.parse(localStorage.getItem("messages")) || [];
     setMessages(storedMessages);
 
-    const storedOrders = getCartDetails(1) || [];
-    setOrders(storedOrders);
   }, []);
 
   useEffect(() => {
     localStorage.setItem("messages", JSON.stringify(messages));
   }, [messages]);
 
-  useEffect(() => {
-    localStorage.setItem("orders", JSON.stringify(orders));
-  }, [orders]);
+
+  const fetchUserOrders = async()=>{
+    const ownedItemIds = await contract.getUserOwnedItems(account)
+    console.log(ownedItemIds.toString())
+    const orders=[]
+    for(let i=0;i<ownedItemIds.length;i++){
+      const item = await contract.getItemDetails(ownedItemIds[i])
+      orders.push({
+        item: {
+            itemId: ownedItemIds[i].toString(),
+            name: item[0],
+            company: item[1],
+            description: item[2],
+            imageURI: item[3],
+            price: ethers.formatEther(item[4]), // Convert price from Wei to ETH
+            stock: item[5].toString(),
+        },    })
+        setOrders(orders)
+      
+
+  }}
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -116,6 +133,7 @@ export default function Page() {
   };
 
   const handleOrdersModal = () => {
+    fetchUserOrders()
     setIsOrdersModalVisible(true);
   };
 
@@ -132,7 +150,12 @@ export default function Page() {
   const showCustomModal = () => {
     setIsCustomModalVisible(true);
   };
-  const buyItem = () => {}
+  const buyItem = async(buyId,price) => {
+    const tx = await contract.buyItem(buyId,1,{ value: ethers.parseEther(price.toString()) }
+  )
+    console.log(tx)
+    alert("Item bought successfully!")
+  }
 
   return (
     <>
@@ -612,7 +635,7 @@ export default function Page() {
               type="primary"
               icon={<ShoppingCartOutlined />}
               key="add-to-cart"
-              onClick={() => buyItem()}
+              onClick={() => buyItem(models.buyItemId,models.price)}
             >
               Buy Item
             </Button>,
@@ -644,7 +667,7 @@ export default function Page() {
                   <p className="text-lg font-semibold text-gray-700">
                     Price:{" "}
                     <span className="text-xl font-bold text-green-600">
-                      ₹{models.price}
+                      {models.price}ETH
                     </span>
                   </p>
                 </div>
@@ -670,35 +693,47 @@ export default function Page() {
 
       {/* Modal for Orders */}
       <Modal
-        open={isOrdersModalVisible}
-        onCancel={handleOrdersModalCancel}
-        footer={null}
-        style={{
-          position: "absolute",
-          top: 30,
-          left: 30,
-          height: "calc(100vh - 20px)",
-        }}
-        bodyStyle={{ overflowY: "auto" }}
-      >
-        <div>
-          <h2 className="text-lg font-bold mb-4">Your Orders</h2>
-          {orders.length > 0 ? (
-            <ul className="list-disc pl-5">
-              {orders.map((order, index) => (
-                <li key={index} className="mb-2">
-                  <div className="flex justify-between items-center">
-                    <span className="font-semibold">{order.item.name}</span>
-                    <span className="text-gray-600">{`₹${order.item.price} X ${order.qty}`}</span>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p>No past orders found.</p>
-          )}
-        </div>
-      </Modal>
+  open={isOrdersModalVisible}
+  onCancel={handleOrdersModalCancel}
+  footer={null}
+  style={{
+    position: "absolute",
+    top: 30,
+    left: 30,
+    height: "calc(100vh - 20px)",
+  }}
+  bodyStyle={{ overflowY: "auto" }}
+>
+  <div>
+    <h2 className="text-lg font-bold mb-4">Your Orders</h2>
+    {orders.length > 0 ? (
+      <ul className="space-y-4">
+        {orders.map((order, index) => (
+          <li key={index} className="p-4 border border-gray-300 rounded-lg shadow-sm">
+            <div className="flex items-center space-x-4">
+              <img 
+                src={order.item.imageURI} 
+                alt={order.item.name} 
+                className="w-16 h-16 object-cover rounded-md"
+              />
+              <div className="flex-1">
+                <h3 className="text-md font-semibold">{order.item.name}</h3>
+                <p className="text-sm text-gray-500">{order.item.company}</p>
+                <p className="text-xs text-gray-400">{order.item.description}</p>
+              </div>
+              <div className="text-right">
+                <p className="text-gray-600">{`${order.item.price} ETH`}</p>
+              </div>
+            </div>
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <p className="text-gray-500">No past orders found.</p>
+    )}
+  </div>
+</Modal>
+
       {/* modal for customisation */}
       {isCustomModalVisible && (
         <Modal

@@ -29,8 +29,10 @@ const Page = () => {
           price: ethers.formatEther(result[4].toString()),
           stock: result[5].toString(),
         });
-        console.log(result[4])
-        console.log(result[5])
+        console.log(i)
+        console.log(result[1])
+        console.log(result[0])
+        console.log(ethers.formatEther(result[4].toString()))
 
       }
       setProducts(fetchedProducts);
@@ -47,6 +49,8 @@ const Page = () => {
     Headphones: products.filter((p) =>
       p.name.toLowerCase().includes("headphone")
     ),
+  Television: products.filter((p) => p.name.toLowerCase().includes("televsion")),
+    Speaker: products.filter((p) => p.name.toLowerCase().includes("speaker")),
   };
 
   return (
@@ -75,7 +79,7 @@ const Page = () => {
                     height="100"
                   />
                   <h3>{product.name}</h3>
-                  <p>Company: {product.company}</p>
+                  <p>Item Name: {product.company}</p>
                   <p>{product.description}</p>
                   <p>Price: {product.price} Wei</p>
                   <p>Stock: {product.stock}</p>

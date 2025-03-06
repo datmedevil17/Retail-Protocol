@@ -3,7 +3,7 @@ const productsData = {
       {
         id: "mobile3",
         name: "iPhone 14 Pro",
-        price: 129999,
+        price: 0.000005,
         specs: [
           { key: "Processor", value: "Apple A16 Bionic" },
           { key: "RAM", value: "6GB" },
@@ -11,11 +11,12 @@ const productsData = {
           { key: "Water Resistant", value: "Yes" },
         ],
         category: "Phones",
+        buyItemId:3
       },
       {
         id: "mobile2",
         name: "Xiaomi Mi 11",
-        price: 39999,
+        price: 0.000005,
         specs: [
           { key: "Processor", value: "Snapdragon 888" },
           { key: "RAM", value: "8GB" },
@@ -23,11 +24,12 @@ const productsData = {
           { key: "Water Resistant", value: "No" },
         ],
         category: "Phones",
+        buyItemId:4
       },
       {
         id: "mobile4",
         name: "Samsung Galaxy S23 Ultra",
-        price: 124999,
+        price: 0.000005,
         specs: [
           { key: "Processor", value: "Snapdragon 8 Gen 2" },
           { key: "RAM", value: "12GB" },
@@ -35,11 +37,12 @@ const productsData = {
           { key: "Water Resistant", value: "Yes" },
         ],
         category: "Phones",
+        buyItemId:5
       },
       {
         id: "mobile",
         name: "Nokia X20",
-        price: 31999,
+        price: 0.000019,
         specs: [
           { key: "Processor", value: "Snapdragon 480" },
           { key: "RAM", value: "8GB" },
@@ -47,11 +50,12 @@ const productsData = {
           { key: "Water Resistant", value: "Yes" },
         ],
         category: "Phones",
+        buyItemId:10
       },
       {
         id: "laptop1",
         name: "Apple MacBook Air (M2, 2022)",
-        price: 119900,
+        price: 0.000002,
         specs: [
           { key: "Processor", value: "Apple M2" },
           { key: "RAM", value: "8GB" },
@@ -59,11 +63,12 @@ const productsData = {
           { key: "Touchscreen", value: "No" },
         ],
         category: "Laptops",
+        buyItemId:1
       },
       {
         id: "laptop2",
         name: "Lenovo IdeaPad Flex 5",
-        price: 62990,
+        price: 0.000005,
         specs: [
           { key: "Processor", value: "AMD Ryzen 5 5500U" },
           { key: "RAM", value: "16GB" },
@@ -71,11 +76,12 @@ const productsData = {
           { key: "Touchscreen", value: "Yes" },
         ],
         category: "Laptops",
+        buyItemId:2
       },
       {
         id: "laptop3",
         name: "HP Victus 16",
-        price: 109990,
+        price: 0.000012,
         specs: [
           { key: "Processor", value: "AMD Ryzen 7 5800H" },
           { key: "RAM", value: "16GB" },
@@ -83,6 +89,7 @@ const productsData = {
           { key: "Touchscreen", value: "No" },
         ],
         category: "Laptops",
+        buyItemId:6
       },
       {
         id: "speaker3",
@@ -95,6 +102,7 @@ const productsData = {
           { key: "Built-in Microphone", value: "No" },
         ],
         category: "Speakers",
+        buyItemId:300
       },
       {
         id: "speaker2",
@@ -107,11 +115,12 @@ const productsData = {
           { key: "Built-in Microphone", value: "No" },
         ],
         category: "Speakers",
+        buyItemId:300
       },
       {
         id: "headphones",
         name: "Sony WH-1000XM5",
-        price: 34990,
+        price: 0.000025,
         specs: [
           { key: "Type", value: "Over-Ear" },
           { key: "Battery Life", value: "30 hours" },
@@ -119,11 +128,12 @@ const productsData = {
           { key: "Foldable", value: "No" },
         ],
         category: "Headphones",
+        buyItemId:17
       },
       {
         id: "headphones3",
         name: "Skullcandy Crusher Evo",
-        price: 14999,
+        price: 0.000025,
         specs: [
           { key: "Type", value: "Over-Ear" },
           { key: "Battery Life", value: "40 hours" },
@@ -131,11 +141,12 @@ const productsData = {
           { key: "Foldable", value: "Yes" },
         ],
         category: "Headphones",
+        buyItemId:18
       },
       {
         id: "headphones2",
         name: "Bose QuietComfort 45",
-        price: 29900,
+        price: 0.000025,
         specs: [
           { key: "Type", value: "Over-Ear" },
           { key: "Battery Life", value: "24 hours" },
@@ -143,11 +154,12 @@ const productsData = {
           { key: "Foldable", value: "No" },
         ],
         category: "Headphones",
+        buyItemId:19
       },
       {
         id: "headphones4",
         name: "Jabra Elite 85h",
-        price: 24999,
+        price: 0.000025,
         specs: [
           { key: "Type", value: "Over-Ear" },
           { key: "Battery Life", value: "36 hours" },
@@ -155,11 +167,12 @@ const productsData = {
           { key: "Foldable", value: "No" },
         ],
         category: "Headphones",
+        buyItemId:20
       },
       {
         id: "tv3",
         name: "Samsung QN90B Neo QLED",
-        price: 159999,
+        price: 0.00009,
         specs: [
           { key: "Screen Size", value: "55 inches" },
           { key: "Resolution", value: "4K" },
@@ -167,11 +180,12 @@ const productsData = {
           { key: "HDR Support", value: "Yes" },
         ],
         category: "Television",
+        buyItemId:21
       },
       {
         id: "tv2",
         name: "LG OLED C2",
-        price: 229990,
+        price: 0.000025,
         specs: [
           { key: "Screen Size", value: "65 inches" },
           { key: "Resolution", value: "4K" },
@@ -179,42 +193,43 @@ const productsData = {
           { key: "HDR Support", value: "Yes" },
         ],
         category: "Television",
+        buyItemId:22
       },
       {
         id: "tv1",
         name: "Panasonic TX-55HZ2000",
-        price: 249990,
+        price: 0.000025,
         specs: [
           { key: "Screen Size", value: "55 inches" },
           { key: "Resolution", value: "4K" },
           { key: "Smart TV", value: "Yes" },
           { key: "HDR Support", value: "Yes" },
         ],
-        category: "Television",
+        category: "Television",buyItemId:23
       },
       {
         id: "console2",
         name: "PlayStation 5",
-        price: 49990,
+        price: 0.00005,
         specs: [
           { key: "Storage", value: "825GB SSD" },
           { key: "Resolution", value: "4K" },
           { key: "Controller", value: "DualSense" },
           { key: "VR Support", value: "Yes" },
         ],
-        category: "Gaming Consoles",
+        category: "Gaming Consoles",buyItemId:16
       },
       {
         id: "PSConsole",
         name: "PlayStation 4 Pro",
-        price: 34990,
+        price: 0.00003,
         specs: [
           { key: "Storage", value: "1TB HDD" },
           { key: "Resolution", value: "4K" },
           { key: "Controller", value: "DualShock 4" },
           { key: "VR Support", value: "Yes" },
         ],
-        category: "Gaming Consoles",
+        category: "Gaming Consoles",buyItemId:15
       },
     ],
   };

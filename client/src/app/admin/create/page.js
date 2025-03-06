@@ -79,6 +79,9 @@ const AddItemPage = () => {
                             <option value="Mobile">Mobile</option>
                             <option value="Laptops">Laptops</option>
                             <option value="Headphones">Headphones</option>
+                            <option value="Televsion">Televsion</option>
+                            <option value="Speaker">Speaker</option>
+
                         </select>
                     </div>
                     
